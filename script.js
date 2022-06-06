@@ -4,11 +4,20 @@
 
 var randBtn = document.querySelector("#btnRandomScreen");
 var cocktailBtn = document.querySelector('#btnSearchScreen');
-var ingredientBtn = document.querySelector('#btnSearchIngredients');
+var ingredientBtn = document.querySelector('#btnSearchIngredientsScreen');
+
 var mainEl = document.querySelector('.main');
+
 var searchCocktailEl = document.querySelector('.search-cocktail');
 var randomCocktailEl = document.querySelector('.random-cocktail');
 var searchIngredientEl = document.querySelector('.search-ingredient');
+
+var searchDrinkBtnEl = document.querySelector("#searchDrinkBtn");
+var randomDrinkBtnEl = document.querySelector("#randomDrinkBtn");
+var searchIngredientsBtnEl = document.querySelector("#searchIngredientsBtn");
+
+var cocktailTextEl = document.querySelector(".cocktailText")
+
 var state = 'main';
 
 //search by ingredient name
@@ -24,18 +33,7 @@ fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?i=vodka")
     console.log(err)
 });
 
-//search by cocktail name
-fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
-.then(function(response) {
-    console.log(response)
-    return response.json()
-})
-.then(function(data) {
-    console.log(data)
-})
-.catch(function(err) {
-    console.log(err)
-});
+
 
 //search random cocktail
 fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php")
@@ -63,7 +61,25 @@ fetch("https://www.themealdb.com/api/json/v1/1/random.php")
     console.log(err)
 });
 
-var getUserDrink
+var getUserDrink = function(){
+//search by cocktail name
+fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
+.then(function(response) {
+    console.log(response)
+    return response.json()
+})
+.then(function(data) {
+    console.log(data)
+})
+.catch(function(err) {
+    console.log(err)
+});
+}
+
+var displayUserDrink = function(searchDrink){
+cocktailTextEl.textContent = searchDrink
+console.log(searchDrink)
+}
 
 function init() {
     displayState()
@@ -111,6 +127,18 @@ ingredientBtn.addEventListener('click', function() {
     state = 'search-ingredient'
     displayState();
 });
+
+
+searchDrinkBtnEl.addEventListener('click', function(){
+var text = cocktailTextEl.value
+console.log(text);
+getUserDrink();
+displayUserDrink()
+//grab strDrink
+//grab strIngredient 1-#
+})
+
+
 
 init();
   
