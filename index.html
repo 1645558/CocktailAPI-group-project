@@ -24,19 +24,24 @@
 
     <section class="has-text-centered search-cocktail">
         <h2 class="has-text-warning p-4">Search for Cocktails</h2>
-        <input class="cocktailText" type="text">
+        <input class="cocktailText" id="cocktailInput" type="text">
         <button id="searchDrinkBtn">Search</button>
+        <button id="backBtn1">Back</button>
         <h2 id="searched-drink"></h2>
-        <div id="current-drink"></div>
+        <div class="current-drink has-text-white" id="currentDrink"></div>
     </section>
     <section class="has-text-centered random-cocktail">
         <h2 class="has-text-warning">Random Cocktail</h2>
         <button id="randomDrinkBtn">Search</button>
+        <button id="backBtn2">Back</button>
+        <div class="random-drink has-text-white" id="randomDrink"></div>
     </section>
     <section class="has-text-centered search-ingredient">
         <h2 class="has-text-warning">Search for Ingredients</h2>
-        <input class="ingredientText" type="text">
+        <input class="ingredientText" id="ingredientInput" type="text">
         <button id="searchIngredientsBtn">Search</button>
+        <button id="backBtn3">Back</button>
+        <div class="current-ingredient has-text-white" id="currentIngredient" ></div>
     </section>
 
     <script src="./script.js"></script>
