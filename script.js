@@ -2,19 +2,22 @@
 // www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
 // www.thecocktaildb.com/api/json/v1/1/random.php
 
-var randBtn = document.querySelector("#btnRandomScreen");
-var cocktailBtn = document.querySelector('#btnSearchScreen');
-var ingredientBtn = document.querySelector('#btnSearchIngredientsScreen');
+var randBtn = document.querySelector(".btnRandomScreen");
+var cocktailBtn = document.querySelector('.btnSearchScreen');
+var ingredientBtn = document.querySelector('.btnSearchIngredientsScreen');
 
 var mainEl = document.querySelector('.main');
 
 var searchCocktailEl = document.querySelector('.search-cocktail');
 var randomCocktailEl = document.querySelector('.random-cocktail');
 var searchIngredientEl = document.querySelector('.search-ingredient');
+var inputIngredientsEl = document.querySelector('.ingredientText')
+var currentDrinkEl = document.querySelector('#current-drink');
 
 var searchDrinkBtnEl = document.querySelector("#searchDrinkBtn");
 var randomDrinkBtnEl = document.querySelector("#randomDrinkBtn");
 var searchIngredientsBtnEl = document.querySelector("#searchIngredientsBtn");
+var searchedDrinkEl = document.querySelector('#searched-drink')
 
 var cocktailTextEl = document.querySelector(".cocktailText")
 
@@ -22,64 +25,58 @@ var state = 'main';
 
 //search by ingredient name
 fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?i=vodka")
-.then(function(response) {
-    console.log(response)
-    return response.json()
-})
-.then(function(data) {
-    console.log(data)
-})
-.catch(function(err) {
-    console.log(err)
-});
-
-
+    .then(function (response) {
+        //console.log(response)
+        return response.json()
+    })
+    .then(function (data) {
+        //console.log(data)
+    })
+    .catch(function (err) {
+        console.log(err)
+    });
 
 //search random cocktail
 fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php")
-.then(function(response) {
-    console.log(response)
-    return response.json()
-})
-.then(function(data) {
-    console.log(data)
-})
-.catch(function(err) {
-    console.log(err)
-});
+    .then(function (response) {
+        //console.log(response)
+        return response.json()
+    })
+    .then(function (data) {
+        //console.log(data)
+    })
+    .catch(function (err) {
+        console.log(err)
+    });
 
 //search random meal
 fetch("https://www.themealdb.com/api/json/v1/1/random.php")
-.then(function(response) {
-    console.log(response)
-    return response.json()
-})
-.then(function(data) {
-    console.log(data)
-})
-.catch(function(err) {
-    console.log(err)
-});
+    .then(function (response) {
+        //console.log(response)
+        return response.json()
+    })
+    .then(function (data) {
+        //console.log(data)
+    })
+    .catch(function (err) {
+        console.log(err)
+    });
 
-var getUserDrink = function(){
-//search by cocktail name
-fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
-.then(function(response) {
-    console.log(response)
-    return response.json()
-})
-.then(function(data) {
-    console.log(data)
-})
-.catch(function(err) {
-    console.log(err)
-});
-}
-
-var displayUserDrink = function(searchDrink){
-cocktailTextEl.textContent = searchDrink
-console.log(searchDrink)
-}
+var getUserDrink = function () {
+    //search by cocktail name
+    fetch("https://www.thecocktaildb.com/api/json/v1/1/search.php?s=")
+        .then(function (response) {
+            //console.log(response)
+            return response.json()
+        })
+        .then(function (data) {
+            console.log(data)
+            displayUserDrink(data)
+        })
+        .catch(function (err) {
+            console.log(err)
+        });
+};
 
 function init() {
     displayState()
@@ -87,10 +84,10 @@ function init() {
 
 function displayState() {
     if (state === 'main') {
-      mainEl.style.display = 'block';
-      searchCocktailEl.style.display = 'none';
-      randomCocktailEl.style.display = 'none';
-      searchIngredientEl.style.display = 'none';
+        mainEl.style.display = 'block';
+        searchCocktailEl.style.display = 'none';
+        randomCocktailEl.style.display = 'none';
+        searchIngredientEl.style.display = 'none';
 
     }
     if (state === 'search-cocktail') {
@@ -113,47 +110,65 @@ function displayState() {
     }
 };
 
-randBtn.addEventListener('click', function() {
+// var drinkSubmitHandler = function(event) {
+//     event.preventDefault()
+//     var drink = searchDrinkBtnEl.value
+//     if (drink) {
+//         getUserDrink(drink)
+//         console.log(drink)
+//     }
+// }
+
+var displayUserDrink = function (searchDrink) {
+    searchDrink = searchedDrinkEl.textContent
+    console.log(searchDrink)
+
+    currentDrinkEl.textContent = '';
+
+    var drinkName = document.createElement('span');
+    drinkName.textContent = 'Drink: ' ;
+
+    currentDrinkEl.appendChild(drinkName);
+};
+
+randBtn.addEventListener('click', function () {
     state = 'random-cocktail'
     displayState();
 });
 
-cocktailBtn.addEventListener('click', function() {
+cocktailBtn.addEventListener('click', function () {
     state = 'search-cocktail'
     displayState();
 });
 
-ingredientBtn.addEventListener('click', function() {
+ingredientBtn.addEventListener('click', function () {
     state = 'search-ingredient'
     displayState();
 });
 
-
-searchDrinkBtnEl.addEventListener('click', function(){
-var text = cocktailTextEl.value
-console.log(text);
-getUserDrink();
-displayUserDrink()
-//grab strDrink
-//grab strIngredient 1-#
-})
-
-
+searchDrinkBtnEl.addEventListener('click', function () {
+    var text = cocktailTextEl.value
+    console.log(text);
+    getUserDrink();
+    displayUserDrink()
+    //grab strDrink
+    //grab strIngredient 1-#
+});
 
 init();
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
