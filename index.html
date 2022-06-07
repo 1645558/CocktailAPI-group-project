@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="has-background-dark">
 
 <head>
     <meta charset="UTF-8">
@@ -12,32 +12,33 @@
 
 <body>
     <header>
-        <h1>Cocktail Recipes</h1>
+        <h1 class="has-text-warning p-5">Cocktail Recipes</h1>
     </header>
-    <h2>Check out some great drinks!</h2>
+    <h2 class="has-text-warning">Check out some great drinks!</h2>
 
-    <main class="main">
-        <button id="btnRandomScreen">Random Drink</button>
-        <button id="btnSearchScreen">Search for Cocktails</button>
-        <button id="btnSearchIngredientsScreen">Search for Ingredients</button>
+    <main class="main has-text-centered p-6">
+        <button class="button btnRandomScreen is-large">Random Drink</button>
+        <button class="button btnSearchScreen is-large">Search for Cocktails</button>
+        <button class="button btnSearchIngredientsScreen is-large">Search for Ingredients</button>
     </main>
 
-    <section class="search-cocktail ">
-        <h2>Search for Cocktails</h2>
+    <section class="has-text-centered search-cocktail">
+        <h2 class="has-text-warning p-4">Search for Cocktails</h2>
         <input class="cocktailText" type="text">
         <button id="searchDrinkBtn">Search</button>
+        <h2 id="searched-drink"></h2>
+        <div id="current-drink"></div>
     </section>
-    <section class="random-cocktail">
-        <h2>Random Cocktail</h2>
+    <section class="has-text-centered random-cocktail">
+        <h2 class="has-text-warning">Random Cocktail</h2>
         <button id="randomDrinkBtn">Search</button>
     </section>
-    <section class="search-ingredient">
-        <h2>Search for Ingredients</h2>
-        <input id="ingedientText" type="text">
+    <section class="has-text-centered search-ingredient">
+        <h2 class="has-text-warning">Search for Ingredients</h2>
+        <input class="ingredientText" type="text">
         <button id="searchIngredientsBtn">Search</button>
     </section>
 
-    <footer></footer>
     <script src="./script.js"></script>
 </body>
 
