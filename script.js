@@ -12,7 +12,7 @@ var searchCocktailEl = document.querySelector('.search-cocktail');
 var randomCocktailEl = document.querySelector('.random-cocktail');
 var searchIngredientEl = document.querySelector('.search-ingredient');
 var inputIngredientsEl = document.querySelector('.ingredientText')
-// var currentDrinkEl = document.querySelector('.current-drink');
+var currentDrinkEl = document.querySelector('.current-drink');
 
 var searchDrinkBtnEl = document.querySelector("#searchDrinkBtn");
 var randomDrinkBtnEl = document.querySelector("#randomDrinkBtn");
@@ -102,7 +102,7 @@ var getUserDrink = function () {
         })
         .then(function (data) {
 
-            // currentDrinkEl.textContent = '';
+            currentDrinkEl.textContent = '';
 
             var drinkName = document.createElement('p');
             drinkName.textContent = 'Drink: ' + data.drinks[0].strDrink;
