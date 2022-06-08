@@ -11,41 +11,52 @@
 </head>
 
 <body>
-    <header>
-        <h1 class="has-text-warning p-5">Cocktail Recipes</h1>
-    </header>
-    <h2 class="has-text-warning">Check out some great drinks!</h2>
 
     <main class="main has-text-centered p-6">
+        <h1 class="header has-text-black p-5">Cocktail Recipes</h1>
+        <h2 class="head has-text-warning">Check out some great drinks!</h2>
         <button class="button btnRandomScreen is-large">Random Drink</button>
         <button class="button btnSearchScreen is-large">Search for Cocktails</button>
         <button class="button btnSearchIngredientsScreen is-large">Search for Ingredients</button>
     </main>
 
     <section class="has-text-centered search-cocktail">
-        <h2 class="has-text-warning p-4">Search for Cocktails</h2>
+        <h2 class="random has-text-warning p-4">Search for Cocktails</h2>
         <input class="cocktailText" id="cocktailInput" type="text">
-        <button class="button is-medium" id="searchDrinkBtn">Search</button>
-        <button class="button is-medium" id="backBtn1">Back</button>
-        <h2 id="searched-drink"></h2>
-        <div class="current-drink has-text-white" id="currentDrink"></div>
+        <button class="button" id="searchDrinkBtn">Search</button>
+        <button class="button" id="backBtn1">Back</button>
+        <div class="column">
+            <h2 id="searched-drink"></h2>
+            <div class="current-drink has-text-white" id="currentDrink"></div>
+        </div>
     </section>
+
     <section class="section is-small has-text-centered random-cocktail">
-        <h2 class="has-text-warning">Random Cocktail</h2>
+        <h2 class="random has-text-warning">Random Cocktail</h2>
         <button class="button is-medium" id="randomDrinkBtn">Click</button>
         <button class="button is-medium" id="backBtn2">Back</button>
-        <div class="random-drink has-text-white" id="randomDrink"></div>
-        <p class="section is-small"></p>
-        <h2 class="has-text-warning">Pair your drink with a meal!</h2>
-        <button id="randomMealBtn">Click</button>
-        <div class="random-meal has-text-white" id="randomMeal"></div>
+        <div class="column">
+            <h2 id="searched-random-drink"></h2>
+            <div class="random-drink has-text-white" id="randomDrink"></div>
+        </div>
+        <p class="section is-medium"></p>
+        <h2 class="random has-text-warning">Pair your drink with a meal!</h2>
+        <button class="button is-medium" id="randomMealBtn">Click</button>
+        <div class="column">
+            <h2 id="searched-meal"></h2>
+            <div class="random-meal has-text-white" id="randomMeal"></div>
+        </div>
     </section>
+
     <section class="has-text-centered search-ingredient">
-        <h2 class="has-text-warning">Search for Ingredients</h2>
+        <h2 class="random has-text-warning p-4">Search for Ingredients</h2>
         <input class="ingredientText" id="ingredientInput" type="text">
         <button id="searchIngredientsBtn">Search</button>
         <button id="backBtn3">Back</button>
-        <div class="current-ingredient has-text-white" id="currentIngredient"></div>
+        <div class="column">
+            <h2 id="searched-ingredient"></h2>
+            <div class="current-ingredient has-text-white" id="currentIngredient"></div>
+        </div>
     </section>
 
     <script src="./script.js"></script>

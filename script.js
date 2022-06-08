@@ -1,42 +1,33 @@
-//button for randomm drink that will show a drink and rhe different ingredients that are needed to make it
-// www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
-// www.thecocktaildb.com/api/json/v1/1/random.php
-
 var randBtn = document.querySelector(".btnRandomScreen");
 var cocktailBtn = document.querySelector('.btnSearchScreen');
 var ingredientBtn = document.querySelector('.btnSearchIngredientsScreen');
-
 var mainEl = document.querySelector('.main');
-
 var searchCocktailEl = document.querySelector('.search-cocktail');
 var randomCocktailEl = document.querySelector('.random-cocktail');
 var searchIngredientEl = document.querySelector('.search-ingredient');
 var inputIngredientsEl = document.querySelector('.ingredientText')
 var currentDrinkEl = document.querySelector('.current-drink');
-
 var searchDrinkBtnEl = document.querySelector("#searchDrinkBtn");
 var randomDrinkBtnEl = document.querySelector("#randomDrinkBtn");
 var searchIngredientsBtnEl = document.querySelector("#searchIngredientsBtn");
 var searchedDrinkEl = document.querySelector('#searched-drink');
-
 var cocktailTextEl = document.querySelector(".cocktailText");
 var cocktailInput = document.querySelector("#cocktailInput");
 var currentDrink = document.querySelector('#currentDrink');
-
+var searchedRandomMealEl = document.querySelector('#searched-meal')
 var backBtn1El = document.querySelector("#backBtn1");
 var backBtn2El = document.querySelector("#backBtn2");
 var backBtn3El = document.querySelector("#backBtn3");
-
 var ingredientInputEl = document.querySelector("#ingredientInput");
 var currentIngredientEl = document.querySelector("#currentIngredient");
 var ingredientDiv = document.querySelector(".current-ingredient");
-
+var searchedRandomDrinkEl = document.querySelector('#searched-random-drink')
 var randomDrinkEl = document.querySelector(".random-drink");
 var randomDrink = document.querySelector("#randomDrink");
 var randomMealBtn = document.querySelector('#randomMealBtn');
 var randomDiv = document.querySelector('.random-meal');
 var randomMealEl = document.querySelector('#randomMeal');
-
+var searchedIngredientEl = document.querySelector('#searched-ingredient');
 var state = 'main';
 
 var getUserIngredients = function () {
@@ -47,25 +38,28 @@ var getUserIngredients = function () {
             return response.json()
         })
         .then(function (data) {
-            console.log(data)
+            //console.log(data)
             ingredientDiv.textContent = " "
 
-            var ingredientName = document.createElement('p');
-            ingredientName.textContent = 'Ingredient: ' + data.ingredients[0].strIngredient;
-            currentIngredientEl.appendChild(ingredientName)
+            var ingredientNameEl = document.createElement('p');
+            ingredientNameEl.textContent = 'Ingredient: ' + data.ingredients[0].strIngredient;
+            currentIngredientEl.appendChild(ingredientNameEl);
 
-            var ingredientdes = document.createElement('p');
-            ingredientdes.textContent = data.ingredients[0].strDescription;
-            currentIngredientEl.appendChild(ingredientdes)
-
-            var img = document.createElement('img');
-            img.src = data.ingredients[0].strDrinkThumb;
-            console.log(data.ingredients[0]);
-            currentIngredientEl.appendChild(img);
+            var ingredientsEl = document.createElement('p');
+            ingredientsEl.textContent = 'Description: ' + data.ingredients[0].strDescription;
+            currentIngredientEl.appendChild(ingredientsEl);
+            getLocalStorageIngredients();
+            getIngredientsImg(ingredientInputEl.value);
         })
         .catch(function (err) {
             console.log(err)
         });
+};
+
+var getIngredientsImg = function (ingredient) {
+    var imgEl = document.createElement('img');
+    imgEl.src = 'https://www.thecocktaildb.com/images/ingredients/' + ingredient + '.png';
+    searchedIngredientEl.appendChild(imgEl);
 };
 
 function getIngredients(obj) {
@@ -73,7 +67,7 @@ function getIngredients(obj) {
         .filter(key => key.includes('Ingredient'))
         .map(ingredient => obj[ingredient])
         .filter(ingredient => ingredient);
-}
+};
 
 var getRandomDrink = function () {
     //search random cocktail
@@ -102,8 +96,8 @@ var getRandomDrink = function () {
             var img = document.createElement('img');
             img.src = data.drinks[0].strDrinkThumb;
             console.log(data.drinks[0]);
-            randomDrink.appendChild(img);
-            
+            searchedRandomDrinkEl.appendChild(img);
+
         })
         .catch(function (err) {
             console.log(err)
@@ -130,7 +124,7 @@ var getRandomMeal = function () {
             var img = document.createElement('img');
             img.src = data.meals[0].strMealThumb;
             console.log(data.meals[0]);
-            randomMealEl.appendChild(img);
+            searchedRandomMealEl.appendChild(img);
 
         })
         .catch(function (err) {
@@ -159,16 +153,16 @@ var getUserDrink = function () {
             currentDrink.appendChild(instructions);
 
             var ingredients = getIngredients(data.drinks[0]);
-            
+
             var ingredientsRan = document.createElement('p')
             ingredientsRan.textContent = 'Ingredients: ' + ingredients;
             currentDrink.appendChild(ingredientsRan)
             console.log(ingredients)
-          
+
             var img = document.createElement('img');
             img.src = data.drinks[0].strDrinkThumb;
             console.log(data.drinks[0]);
-            currentDrink.appendChild(img);
+            searchedDrinkEl.appendChild(img);
         })
         .catch(function (err) {
             console.log(err)
@@ -206,20 +200,21 @@ function displayState() {
         searchIngredientEl.style.display = 'block';
     }
 };
+
 var items = [];
-var getLocalStorageDrinks = function(){
-    
+var getLocalStorageDrinks = function () {
+
     var cocktail = cocktailInput.value
     items.push(cocktail)
-    localStorage.setItem("Drinks" , JSON.stringify(items))
-    
-}
+    localStorage.setItem("Drinks", JSON.stringify(items))
 
-var getLocalStorageIngredients = function(){
-var ingredients = ingredientInputEl.value
-items.push(ingredients)
-localStorage.setItem("Ingredients" ,JSON.stringify(items) )
-}
+};
+
+var getLocalStorageIngredients = function () {
+    var ingredients = ingredientInputEl.value
+    items.push(ingredients)
+    localStorage.setItem("Ingredients", JSON.stringify(items))
+};
 
 randBtn.addEventListener('click', function () {
     state = 'random-cocktail'
@@ -233,17 +228,15 @@ cocktailBtn.addEventListener('click', function () {
 
 ingredientBtn.addEventListener('click', function () {
     state = 'search-ingredient'
-
     displayState();
 });
 
 searchIngredientsBtnEl.addEventListener('click', function () {
     getUserIngredients();
-    getLocalStorageIngredients();
-    
-})
+});
+
 searchDrinkBtnEl.addEventListener('click', function () {
-    var text = cocktailTextEl.value
+    var text = cocktailTextEl.value;
     console.log(text);
     getUserDrink();
     getLocalStorageDrinks();
@@ -253,26 +246,26 @@ searchDrinkBtnEl.addEventListener('click', function () {
 
 randomMealBtn.addEventListener('click', function () {
     getRandomMeal();
-})
+});
 
 randomDrinkBtnEl.addEventListener('click', function () {
     getRandomDrink();
-    
-})
+});
 
 backBtn1El.addEventListener('click', function () {
     state = 'main';
     displayState();
-})
+});
+
 backBtn2El.addEventListener('click', function () {
     state = 'main';
     displayState();
-})
+});
+
 backBtn3El.addEventListener('click', function () {
     state = 'main';
     displayState();
-})
-
+});
 
 init();
 
