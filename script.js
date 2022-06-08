@@ -17,25 +17,27 @@ var currentDrinkEl = document.querySelector('.current-drink');
 var searchDrinkBtnEl = document.querySelector("#searchDrinkBtn");
 var randomDrinkBtnEl = document.querySelector("#randomDrinkBtn");
 var searchIngredientsBtnEl = document.querySelector("#searchIngredientsBtn");
-var searchedDrinkEl = document.querySelector('#searched-drink')
+var searchedDrinkEl = document.querySelector('#searched-drink');
 
-var cocktailTextEl = document.querySelector(".cocktailText")
-var cocktailInput = document.querySelector("#cocktailInput")
-var currentDrink = document.querySelector('#currentDrink')
+var cocktailTextEl = document.querySelector(".cocktailText");
+var cocktailInput = document.querySelector("#cocktailInput");
+var currentDrink = document.querySelector('#currentDrink');
 
-var backBtn1El = document.querySelector("#backBtn1")
-var backBtn2El = document.querySelector("#backBtn2")
-var backBtn3El = document.querySelector("#backBtn3")
+var backBtn1El = document.querySelector("#backBtn1");
+var backBtn2El = document.querySelector("#backBtn2");
+var backBtn3El = document.querySelector("#backBtn3");
 
-var ingredientInputEl = document.querySelector("#ingredientInput")
-var currentIngredientEl = document.querySelector("#currentIngredient")
-var ingredientDiv = document.querySelector(".current-ingredient")
+var ingredientInputEl = document.querySelector("#ingredientInput");
+var currentIngredientEl = document.querySelector("#currentIngredient");
+var ingredientDiv = document.querySelector(".current-ingredient");
 
-var randomDrinkEl = document.querySelector(".random-drink")
-var randomDrink = document.querySelector("#randomDrink")
+var randomDrinkEl = document.querySelector(".random-drink");
+var randomDrink = document.querySelector("#randomDrink");
+var randomMealBtn = document.querySelector('#randomMealBtn');
+var randomDiv = document.querySelector('.random-meal');
+var randomMealEl = document.querySelector('#randomMeal');
 
 var state = 'main';
-
 
 var getUserIngredients = function () {
     //search by ingredient name
@@ -47,9 +49,11 @@ var getUserIngredients = function () {
         .then(function (data) {
             console.log(data)
             ingredientDiv.textContent = " "
+
             var ingredientName = document.createElement('p');
             ingredientName.textContent = 'Ingredient: ' + data.ingredients[0].strIngredient;
             currentIngredientEl.appendChild(ingredientName)
+
             var ingredientdes = document.createElement('p');
             ingredientdes.textContent = data.ingredients[0].strDescription;
             currentIngredientEl.appendChild(ingredientdes)
@@ -57,9 +61,16 @@ var getUserIngredients = function () {
         .catch(function (err) {
             console.log(err)
         });
+};
 
+function getIngredients(obj) {
+    return Object.keys(obj)
+        .filter(key => key.includes('Ingredient'))
+        .map(ingredient => obj[ingredient])
+        .filter(ingredient => ingredient);
 }
-var getRandomDrink = function (){
+
+var getRandomDrink = function () {
     //search random cocktail
     fetch("https://www.thecocktaildb.com/api/json/v1/1/random.php")
         .then(function (response) {
@@ -69,29 +80,55 @@ var getRandomDrink = function (){
         .then(function (data) {
             console.log(data)
             randomDrinkEl.textContent = " "
+
             var drinkNameRan = document.createElement('p');
             drinkNameRan.textContent = 'Drink: ' + data.drinks[0].strDrink;
             console.log(data.drinks[0]);
             randomDrink.appendChild(drinkNameRan);
+
+            var ingredients = getIngredients(data.drinks[0]);
+            //console.log(ingredients);
+            //for (var i = 0; i < ingredients.length; i++) {
+            var ingredientsRan = document.createElement('p')
+            ingredientsRan.textContent = 'Ingredients: ' + ingredients;
+            randomDrink.appendChild(ingredientsRan)
+            console.log(ingredients)
+            // }
+            // // if (ingredients != null) {
+            // //     console.log(ingredients)
+            // }
+            //var ingredientRan = document.createElement('p');
+            //ingredientRan.textContent = 'Ingredients: ' + data.drinks[0].strIngredient;
+            //console.log(ingredients)
+            //}
         })
         .catch(function (err) {
             console.log(err)
         });
 
-}
+};
 
-//search random meal
-fetch("https://www.themealdb.com/api/json/v1/1/random.php")
-    .then(function (response) {
-        //console.log(response)
-        return response.json()
-    })
-    .then(function (data) {
-        //console.log(data)
-    })
-    .catch(function (err) {
-        console.log(err)
-    });
+var getRandomMeal = function () {
+    //search random meal
+    fetch("https://www.themealdb.com/api/json/v1/1/random.php")
+        .then(function (response) {
+            //console.log(response)
+            return response.json()
+        })
+        .then(function (data) {
+            console.log(data)
+
+            randomDiv.textContent = '';
+
+            var mealRan = document.createElement('p');
+            mealRan.textContent = 'Name: ' + data.meals[0].strMeal
+            randomMealEl.appendChild(mealRan)
+
+        })
+        .catch(function (err) {
+            console.log(err)
+        });
+};
 
 var getUserDrink = function () {
     //search by cocktail name
@@ -108,9 +145,18 @@ var getUserDrink = function () {
             drinkName.textContent = 'Drink: ' + data.drinks[0].strDrink;
             console.log(data.drinks[0]);
             currentDrink.appendChild(drinkName);
+
             var instructions = document.createElement('p');
-            instructions.textContent = data.drinks[0].strInstructions
+            instructions.textContent = 'Intructions: ' + data.drinks[0].strInstructions
             currentDrink.appendChild(instructions);
+
+            var ingredients = getIngredients(data.drinks[0]);
+            //console.log(ingredients);
+            //for (var i = 0; i < ingredients.length; i++) {
+            var ingredientsRan = document.createElement('p')
+            ingredientsRan.textContent = 'Ingredients: ' + ingredients;
+            currentDrink.appendChild(ingredientsRan)
+            console.log(ingredients)
             // var ingredient = document.createElement('p');
             // ingredient.textContent = 'ingredient 1: ' + data.drinks[0].strIngredient1
             // currentDrink.appendChild(ingredient)
@@ -152,7 +198,6 @@ function displayState() {
     }
 };
 
-
 randBtn.addEventListener('click', function () {
     state = 'random-cocktail'
     displayState();
@@ -165,11 +210,11 @@ cocktailBtn.addEventListener('click', function () {
 
 ingredientBtn.addEventListener('click', function () {
     state = 'search-ingredient'
-    
+
     displayState();
 });
 
-searchIngredientsBtnEl.addEventListener('click', function(){
+searchIngredientsBtnEl.addEventListener('click', function () {
     getUserIngredients();
 })
 searchDrinkBtnEl.addEventListener('click', function () {
@@ -180,7 +225,11 @@ searchDrinkBtnEl.addEventListener('click', function () {
     //grab strIngredient 1-#
 });
 
-randomDrinkBtnEl.addEventListener('click', function(){
+randomMealBtn.addEventListener('click', function () {
+    getRandomMeal();
+})
+
+randomDrinkBtnEl.addEventListener('click', function () {
     getRandomDrink();
 })
 
