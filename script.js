@@ -59,7 +59,7 @@ var getUserIngredients = function () {
 var getIngredientsImg = function (ingredient) {
     var imgEl = document.createElement('img');
     imgEl.src = 'https://www.thecocktaildb.com/images/ingredients/' + ingredient + '.png';
-    searchedIngredientEl.appendChild(imgEl);
+    currentIngredientEl.appendChild(imgEl);
 };
 
 function getIngredients(obj) {
@@ -96,7 +96,7 @@ var getRandomDrink = function () {
             var img = document.createElement('img');
             img.src = data.drinks[0].strDrinkThumb;
             console.log(data.drinks[0]);
-            searchedRandomDrinkEl.appendChild(img);
+            randomDrink.appendChild(img);
 
         })
         .catch(function (err) {
@@ -124,7 +124,7 @@ var getRandomMeal = function () {
             var img = document.createElement('img');
             img.src = data.meals[0].strMealThumb;
             console.log(data.meals[0]);
-            searchedRandomMealEl.appendChild(img);
+            randomMealEl.appendChild(img);
 
         })
         .catch(function (err) {
@@ -162,7 +162,7 @@ var getUserDrink = function () {
             var img = document.createElement('img');
             img.src = data.drinks[0].strDrinkThumb;
             console.log(data.drinks[0]);
-            searchedDrinkEl.appendChild(img);
+            currentDrink.appendChild(img);
         })
         .catch(function (err) {
             console.log(err)
