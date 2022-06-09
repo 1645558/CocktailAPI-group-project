@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="./assets/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
     <title>Cocktail Recipes</title>
 </head>
@@ -13,7 +13,7 @@
 <body>
 
     <main class="main has-text-centered p-6">
-        <h1 class="header has-text-black p-5">Cocktail Recipes</h1>
+        <h1 class="header has-text-black p-5">Cocktails & More</h1>
         <h2 class="head has-text-warning">Check out some great drinks!</h2>
         <button class="button btnRandomScreen is-large">Random Drink</button>
         <button class="button btnSearchScreen is-large">Search for Cocktails</button>
@@ -23,9 +23,9 @@
     <section class="has-text-centered search-cocktail">
         <h2 class="random has-text-warning p-4">Search for Cocktails</h2>
         <input class="cocktailText" id="cocktailInput" type="text">
-        <button class="button" id="searchDrinkBtn">Search</button>
-        <button class="button" id="backBtn1">Back</button>
-        <div class="column">
+        <button id="searchDrinkBtn">Search</button>
+        <button id="backBtn1">Home</button>
+        <div class="col">
             <h2 id="searched-drink"></h2>
             <div class="current-drink has-text-white" id="currentDrink"></div>
         </div>
@@ -34,15 +34,15 @@
     <section class="section is-small has-text-centered random-cocktail">
         <h2 class="random has-text-warning">Random Cocktail</h2>
         <button class="button is-medium" id="randomDrinkBtn">Click</button>
-        <button class="button is-medium" id="backBtn2">Back</button>
-        <div class="column">
+        <button class="button is-medium" id="backBtn2">Home</button>
+        <div class="col">
             <h2 id="searched-random-drink"></h2>
             <div class="random-drink has-text-white" id="randomDrink"></div>
         </div>
         <p class="section is-medium"></p>
         <h2 class="random has-text-warning">Pair your drink with a meal!</h2>
         <button class="button is-medium" id="randomMealBtn">Click</button>
-        <div class="column">
+        <div class="col">
             <h2 id="searched-meal"></h2>
             <div class="random-meal has-text-white" id="randomMeal"></div>
         </div>
@@ -52,14 +52,14 @@
         <h2 class="random has-text-warning p-4">Search for Ingredients</h2>
         <input class="ingredientText" id="ingredientInput" type="text">
         <button id="searchIngredientsBtn">Search</button>
-        <button id="backBtn3">Back</button>
-        <div class="column">
+        <button id="backBtn3">Home</button>
+        <div class="col">
             <h2 id="searched-ingredient"></h2>
             <div class="current-ingredient has-text-white" id="currentIngredient"></div>
         </div>
     </section>
 
-    <script src="./script.js"></script>
+    <script src="./assets/script.js"></script>
 </body>
 
 </html>
