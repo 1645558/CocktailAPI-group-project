@@ -6,12 +6,12 @@
 3. [Resources](#resources)
 
 ## Description
-This assignments purpose was to work on collaboration between partner's and being able to upload from two different places. also working on using api's to make the process of writing the code easier.
+This website allows you to find a cocktail your looking for and get all the information you could need to make one! There are other sections that allow you to further research ingredients, and discover new cocktails you've never heard of!
 
 ## Visuals
-![CocktailAPI](/Cocktail-Recipes.png)
+![CocktailAPI](./assets/Cocktail-Recipes.png)
 
 ## Resources
-- [Live Site](https://mortalmx13.github.io/weather-dashboad/)
+- [Live Site](https://1645558.github.io/CocktailAPI-group-project/)
 
 - [Respository](https://github.com/1645558/CocktailAPI-group-project)
